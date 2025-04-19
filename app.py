@@ -7,7 +7,7 @@ import os
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/images'
-CLIPDROP_API_KEY = 'aab046e16f6c4bd7f51b09ed682339467c43b647777a24e598c4c406302eb5eb42d526970095f7634dc908df448cd696'  # ← Ganti dengan API key kamu
+CLIPDROP_API_KEY = os.getenv('CLIPDROP_API_KEY')  # ← Ganti dengan API key kamu
 
 secret_message = ""
 
