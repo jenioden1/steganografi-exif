@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="flex flex-col items-center min-h-screen px-4">
+  
+  <!-- Judul -->
+  <h1 class="text-3xl md:text-4xl font-bold text-center mb-10 text-blue-500 dark:text-blue-400">
+    🧠 Generate & Embed Gambar
+  </h1>
+
+  <!-- Tombol Generate -->
+  <form method="post" class="flex flex-wrap justify gap-4 mb-6">
+    <input type="hidden" name="generate" value="1">
+    <button type="submit"
+      class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg shadow">
+      🎨 Generate Gambar
+    </button>
+  </form>
+
+  <!-- Tombol Embed muncul setelah generate -->
+  {% if image_path %}
+  <form method="post" class="flex justify-center gap-4 mb-6">
+    <input type="hidden" name="embed" value="1">
+    <button type="submit"
+      class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-6 rounded-lg shadow">
+      ✉️ Embed Pesan
+    </button>
+  </form>
+  {% endif %}
+
+  <!-- Gambar Hasil -->
+  {% if image_path %}
+  <div class="flex flex-col md:flex-row justify-center gap-8 items-center mb-8">
+    <div class="text-center">
+      <h3 class="font-semibold text-lg mb-2">📸 Gambar Dihasilkan:</h3>
+      <img src="{{ url_for('static', filename='images/generated.png') }}"
+        class="rounded-xl shadow-lg w-full max-w-xs">
+    </div>
+
+    {% if embedded_path %}
+    <div class="text-center">
+      <h3 class="font-semibold text-lg mb-2">🔍 Gambar dengan Pesan Tersembunyi:</h3>
+      <img src="{{ url_for('static', filename='images/embedded.png') }}"
+        class="rounded-xl shadow-lg w-full max-w-xs">
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  <!-- Tombol Ekstrak -->
+  {% if embedded_path %}
+  <a href="{{ url_for('extract') }}"
+    class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-lg shadow transition">
+    🚀 Ekstrak Sekarang
+  </a>
+  {% endif %}
+
+</div>
+{% endblock %}

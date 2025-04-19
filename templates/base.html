@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Steganografi EXIF</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    };
+    if (localStorage.getItem("theme") === "light") {
+      document.documentElement.classList.remove("dark");
+    } else {
+      document.documentElement.classList.add("dark");
+    }
+
+    function toggleDarkMode() {
+      document.documentElement.classList.toggle("dark");
+      localStorage.setItem("theme", document.documentElement.classList.contains("dark") ? "dark" : "light");
+    }
+  </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen flex flex-col transition-all duration-300">
+  <header class="bg-white dark:bg-gray-800 shadow sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-blue-600 dark:text-blue-400">Steganografi EXIF</h1>
+      <nav class="space-x-4 text-sm">
+        <a href="{{ url_for('index') }}" class="hover:underline hover:text-blue-500">Input</a>
+        <a href="{{ url_for('generate') }}" class="hover:underline hover:text-blue-500">Generate</a>
+        <a href="{{ url_for('extract') }}" class="hover:underline hover:text-blue-500">Extract</a>
+        <button onclick="toggleDarkMode()" class="ml-4 bg-gray-300 dark:bg-gray-600 px-2 py-1 rounded">🌓</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="flex-grow max-w-4xl mx-auto p-6 animate-fade-in">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="text-center text-sm text-gray-500 dark:text-gray-400 py-6">
+    &copy; 2025 Steganografi App | Flask + Tailwind
+  </footer>
+
+  <style>
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fade-in 0.4s ease-out;
+    }
+  </style>
+
+<script>
+    // Reset form setelah submit sukses
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.getElementById('extractForm');
+      if (form) {
+        form.addEventListener('submit', function () {
+          setTimeout(() => form.reset(), 500);  // reset input setelah submit
+        });
+      }
+    });
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="text-3xl font-semibold mb-6">💬 Masukkan Pesan Rahasia</h2>
+<form method="post" class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md space-y-4">
+  <textarea name="message" rows="5" required
+    class="w-full p-3 rounded-lg border dark:border-gray-700 bg-gray-100 dark:bg-gray-700 dark:text-white resize-none"
+    placeholder="Tulis pesan rahasia di sini..."></textarea>
+  <button type="submit"
+    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition duration-300">
+    Selanjutnya
+  </button>
+</form>
+{% endblock %}
